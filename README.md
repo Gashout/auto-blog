@@ -1,245 +1,367 @@
-# Full-Stack Technical Challenge – Auto-Generated Blog (AWS + Docker)
+# Auto-Generated Blog
 
-Welcome! This is a technical exercise for a full-stack / DevOps-oriented developer.
+> A full-stack blog application that automatically generates articles using AI, built with React, Node.js, PostgreSQL, and deployed on AWS.
 
-You have **1 week** from receiving this challenge to complete it.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The goal is to build and deploy a **simple auto-generated blog** using:
-- **React** (frontend)
-- **Node.js** (backend)
-- **PostgresSQL** (DB)
-- **Docker**
-- **AWS EC2 + CodeBuild + ECR**
+## 🎯 Project Overview
 
-> ❗ **Important:**  
-> - Deploy only on **EC2**.  
-> - **Do NOT use ECS** (not required for the challenge).  
-> - Use **free-tier AWS** as much as possible.  
-> - AI text generation may use a **free API** or **max $5** on a paid API.
+This project is a technical challenge submission demonstrating full-stack development and DevOps capabilities. The application automatically generates blog articles daily using AI and features a modern, responsive web interface.
 
----
+### Key Features
 
-## 1. What You Must Submit
+- ✨ **AI-Powered Content**: Automatic article generation using HuggingFace API
+- 📅 **Daily Automation**: Scheduled article creation via node-cron
+- 🎨 **Modern UI**: Responsive React frontend with clean design
+- 🐳 **Containerized**: Full Docker support for development and production
+- ☁️ **AWS Deployment**: CI/CD pipeline with CodeBuild, ECR, and EC2
+- 💾 **PostgreSQL Database**: Reliable data persistence
 
-At the end of the challenge, send an email to:
-
-**📩 hiring@assimetria.com**
-
-with the subject:
-
-**`[Tech Challenge] - <Your Name>`**
-
-### Your email must include **three things**:
-
-1. **Live URL**  
-   - Link to your deployed app running on EC2.
-
-2. **Code Repository**  
-   - A link to a **public GitHub repo** containing:
-     - Source code  
-     - Dockerfiles  
-     - Infrastructure config (CodeBuild, etc.)  
-     - Any notes needed to run locally
-
-3. **Short Video (30–120 seconds)**  
-   - Briefly introduce yourself  
-   - Explain what you built  
-   - Explain your technical decisions  
-   - Mention what you would improve with more time  
-   - Any video platform is fine (YouTube unlisted, Loom, Drive, etc.)
-
----
-
-## 2. Application Requirements
-
-### Frontend (React)
-
-- Should display a list of blog articles  
-- Should display full content when clicking an article  
-- Built using React, Dockerized  
-
-### Backend (Node.js)
-
-- Provides endpoints to:
-  - List all articles
-  - Retrieve a single article
-- Generates new articles using one of the AI/text methods below  
-- Dockerized
-
-### Storage
-
-- Your choice:
-  - JSON file  
-  - SQLite  
-  - Postgres  
-  - Any simple persistent option on EC2  
-
-No constraints here — pick what you’re comfortable with.
-
----
-
-## 3. AI / Text Generation Options
-
-Your backend must generate articles using **one of the following** options:
-
-### **Option A – Free API (Recommended)**
-
-You may use any of these:
-
-- HuggingFace Inference API (free models)
-- OpenRouter free-tier models
-- DeepInfra free-tier
-- Replicate free models
-
-→ Easily **€0 cost**.
-
-### **Option B – OpenAI (Max ~$5)**
-
-You can use OpenAI models, but:
-
-- Use your own API key
-- Spend **no more than $5**
-
-### **Option C – Local Small Model**
-
-You may run an open-source model locally inside the backend container.
-
----
-
-## 4. Automation Requirements
-
-The system must:
-
-- Automatically generate **1 new article per day**
-- Already contain **at least 3 articles** when we check it
-
-You can implement scheduling using:
-
-- A **cron job** on EC2, or  
-- A scheduler inside Node.js (e.g. `node-cron`)
-
-Either is fine as long as it works.
-
----
-
-## 5. Infrastructure Requirements
-
-This task evaluates your ability to set up real deployment workflows.
-
-### AWS Resources
-
-You must use:
-
-- **EC2**  
-  - One instance  
-  - Hosts your dockerized frontend + backend  
-  - **Do NOT use ECS**
-
-- **ECR**  
-  - Store your Docker images
-
-- **CodeBuild**  
-  - Pulls your repo  
-  - Builds Docker images  
-  - Pushes images to ECR
-
-### Docker
-
-- Both frontend and backend must have separate Dockerfiles
-- You can include a `docker-compose.yml` for local dev
-
-### Basic Deployment Flow
-
-One acceptable example:
-
-1. Push code to GitHub  
-2. CodeBuild:
-   - Pulls repo  
-   - Builds Docker images  
-   - Pushes to ECR  
-3. EC2:
-   - Pulls and runs the latest images  
-4. App runs on EC2 public IP
-
-You may automate this or run manually — just explain what you did.
-
----
-## 6. Suggested Folder Structure
-
-```text
-.
-├── backend/
-│   ├── src/
-│   │   ├── index.js
-│   │   ├── routes/
-│   │   ├── services/
-│   │   │   ├── aiClient.js
-│   │   │   └── articleJob.js
-│   │   └── models/
-│   ├── package.json
-│   ├── Dockerfile
-│   └── README.md
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── api/
-│   │   │   └── client.js
-│   │   └── App.jsx
-│   ├── package.json
-│   ├── Dockerfile
-│   └── README.md
-│
-├── infra/
-│   ├── buildspec.yml
-│   ├── docker-compose.yml
-│   └── scripts/
-│       ├── deploy.sh
-│       └── init-ec2.sh
-│
-├── docs/
-│   └── ARCHITECTURE.md
-│
-└── README.md
+## 🏗️ Architecture
 
 ```
-Feel free to adjust, but keep it clean and documented.
+┌──────────┐      ┌──────────┐      ┌────────────┐
+│  React   │ ───▶ │ Node.js  │ ───▶ │ PostgreSQL │
+│ Frontend │      │ Backend  │      │  Database  │
+└──────────┘      └──────────┘      └────────────┘
+                       │
+                       ▼
+              ┌─────────────────┐
+              │ HuggingFace API │
+              │  (AI Articles)  │
+              └─────────────────┘
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Docker Desktop
+- Node.js 18+ (for local development)
+- Git
+
+### Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/auto-blog.git
+   cd auto-blog
+   ```
+
+2. **Create environment file**
+   ```bash
+   cp backend/.env.example backend/.env
+   ```
+
+3. **Start all services**
+   ```bash
+   docker-compose up --build
+   ```
+
+4. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:5000
+   - API Docs: http://localhost:5000/
+
+5. **Generate initial articles** (optional)
+   ```bash
+   curl -X POST http://localhost:5000/api/articles/generate
+   curl -X POST http://localhost:5000/api/articles/generate
+   curl -X POST http://localhost:5000/api/articles/generate
+   ```
+
+### Stop Services
+
+```bash
+docker-compose down
+```
+
+## 📁 Project Structure
+
+```
+auto-blog/
+├── backend/                 # Node.js + Express backend
+│   ├── src/
+│   │   ├── config/         # Database configuration
+│   │   ├── models/         # Data models
+│   │   ├── routes/         # API routes
+│   │   ├── services/       # Business logic (AI, cron)
+│   │   └── index.js        # Entry point
+│   ├── Dockerfile
+│   └── package.json
+│
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── api/           # API client
+│   │   ├── components/    # React components
+│   │   ├── pages/         # Page components
+│   │   └── App.jsx        # Main app
+│   ├── Dockerfile
+│   └── package.json
+│
+├── infra/                  # Infrastructure as Code
+│   ├── buildspec.yml      # AWS CodeBuild config
+│   └── scripts/
+│       ├── deploy.sh      # EC2 deployment script
+│       └── init-ec2.sh    # EC2 initialization
+│
+├── docs/
+│   └── ARCHITECTURE.md    # Architecture documentation
+│
+├── docker-compose.yml      # Local development setup
+├── TASK.md                # Development checklist
+├── PROJECT_ROADMAP.md     # Implementation guide
+└── README.md              # This file
+```
+
+## 🔧 Technology Stack
+
+### Frontend
+- **React 18** - UI framework
+- **Vite** - Build tool
+- **React Router** - Client-side routing
+- **Axios** - HTTP client
+- **Nginx** - Production web server
+
+### Backend
+- **Node.js 18** - Runtime
+- **Express** - Web framework
+- **PostgreSQL 15** - Database
+- **node-cron** - Task scheduling
+- **Axios** - HTTP client for AI API
+
+### Infrastructure
+- **Docker** - Containerization
+- **AWS EC2** - Hosting (t2.micro)
+- **AWS ECR** - Container registry
+- **AWS CodeBuild** - CI/CD pipeline
+- **GitHub** - Version control
+
+## 📡 API Endpoints
+
+### Articles
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/articles` | Get all articles |
+| GET | `/api/articles/:id` | Get article by ID |
+| GET | `/api/articles/stats` | Get statistics |
+| POST | `/api/articles/generate` | Generate new article |
+
+### System
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/health` | Health check |
+| GET | `/` | API information |
+
+## 🤖 AI Article Generation
+
+- **Service**: HuggingFace Inference API (Free Tier)
+- **Model**: GPT-2
+- **Schedule**: Daily at 2:00 AM UTC
+- **Topics**: Technology, AI, sustainability, web development, and more
+- **Fallback**: Predefined content if API fails
+
+## ☁️ AWS Deployment
+
+### Prerequisites
+
+1. AWS Account with free tier
+2. AWS CLI configured
+3. GitHub repository
+
+### Setup Steps
+
+1. **Create ECR Repositories**
+   ```bash
+   aws ecr create-repository --repository-name auto-blog-backend
+   aws ecr create-repository --repository-name auto-blog-frontend
+   ```
+
+2. **Launch EC2 Instance**
+   - AMI: Amazon Linux 2023
+   - Instance Type: t2.micro
+   - Security Group: Allow ports 22, 80, 3000, 5000
+   - Run initialization script: `./infra/scripts/init-ec2.sh`
+
+3. **Configure CodeBuild**
+   - Create build project
+   - Source: GitHub repository
+   - Buildspec: `infra/buildspec.yml`
+   - Environment variables: `AWS_ACCOUNT_ID`, `AWS_DEFAULT_REGION`
+
+4. **Deploy to EC2**
+   ```bash
+   ssh -i your-key.pem ec2-user@YOUR_EC2_IP
+   git clone https://github.com/YOUR_USERNAME/auto-blog.git
+   cd auto-blog
+   ./infra/scripts/deploy.sh
+   ```
+
+See [PROJECT_ROADMAP.md](PROJECT_ROADMAP.md) for detailed deployment guide.
+
+## 🧪 Testing
+
+### Backend Tests
+
+```bash
+# Health check
+curl http://localhost:5000/health
+
+# Get all articles
+curl http://localhost:5000/api/articles
+
+# Generate article
+curl -X POST http://localhost:5000/api/articles/generate
+```
+
+### Frontend Tests
+
+Open http://localhost:3000 in your browser and verify:
+- Article list displays correctly
+- Clicking an article shows full content
+- Navigation works properly
+- Responsive design on mobile
+
+## 📊 Monitoring
+
+### View Logs
+
+```bash
+# Backend logs
+docker-compose logs -f backend
+
+# Frontend logs
+docker-compose logs -f frontend
+
+# Database logs
+docker-compose logs -f db
+```
+
+### Check Container Status
+
+```bash
+docker-compose ps
+```
+
+## 🔒 Security
+
+- Environment variables for sensitive data
+- No hardcoded credentials
+- CORS enabled for frontend-backend communication
+- PostgreSQL not exposed publicly
+- Docker health checks
+- EC2 security groups properly configured
+
+## 💰 Cost Estimation
+
+### AWS Free Tier
+- EC2 t2.micro: 750 hours/month free
+- ECR: 500 MB storage free
+- CodeBuild: 100 build minutes/month free
+
+### After Free Tier
+- Estimated: $8-10/month
+
+## 🛠️ Development
+
+### Install Dependencies
+
+```bash
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd frontend
+npm install
+```
+
+### Run Locally (without Docker)
+
+```bash
+# Terminal 1 - Database
+docker run -d -p 5432:5432 \
+  -e POSTGRES_USER=bloguser \
+  -e POSTGRES_PASSWORD=blogpass \
+  -e POSTGRES_DB=autoblog \
+  postgres:15-alpine
+
+# Terminal 2 - Backend
+cd backend
+npm run dev
+
+# Terminal 3 - Frontend
+cd frontend
+npm run dev
+```
+
+## 📝 Environment Variables
+
+### Backend (.env)
+
+```env
+PORT=5000
+DATABASE_URL=postgresql://bloguser:blogpass@db:5432/autoblog
+NODE_ENV=development
+HUGGINGFACE_API_URL=https://api-inference.huggingface.co/models/gpt2
+```
+
+## 🐛 Troubleshooting
+
+### Port Already in Use
+
+```bash
+# Find and kill process
+lsof -ti:5000 | xargs kill -9
+```
+
+### Database Connection Failed
+
+```bash
+# Check if database is running
+docker-compose ps db
+
+# Restart database
+docker-compose restart db
+```
+
+### Docker Build Failed
+
+```bash
+# Clean up and rebuild
+docker-compose down -v
+docker system prune -a
+docker-compose up --build
+```
+
+## 📚 Documentation
+
+- [Architecture Documentation](docs/ARCHITECTURE.md)
+- [Project Roadmap](PROJECT_ROADMAP.md)
+- [Task Checklist](TASK.md)
+- [Backend README](backend/README.md)
+- [Frontend README](frontend/README.md)
+
+## 🎥 Demo Video
+
+[Link to demo video will be added here]
+
+## 🚀 Live Demo
+
+[Link to deployed application will be added here]
+
+## 📧 Contact
+
+For questions about this project, please contact: [Your Email]
+
+## 📄 License
+
+MIT License - feel free to use this project for learning purposes.
 
 ---
 
-## 7. Evaluation Criteria
-
-We look at:
-
-- End-to-end execution  
-- Working deployment  
-- Quality and clarity of code  
-- Docker & AWS understanding  
-- Clean build pipeline (CodeBuild + ECR)  
-- Reasonable AI integration  
-- Clear thinking in your video  
-- Ability to communicate your decisions
-
-We do **not** expect perfection.  
-We expect you to show **ownership, reasoning, and autonomy**.
-
----
-
-## 8. Submission Summary
-
-Send everything to:
-
-**📩 hiring@assimetria.com**
-
-With subject:
-
-**`[Tech Challenge] - <Your Name>`**
-
-Include:
-
-- **1. Link to deployed app**
-- **2. Link to GitHub repo**
-- **3. Video link (30–120 sec)**
-
-Thank you and good luck!
+**Built with ❤️ for the Technical Challenge**
