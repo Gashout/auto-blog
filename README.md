@@ -6,7 +6,7 @@
 
 ## 🌐 Live Demo
 
-**🚀 Application URL:** http://3.25.219.63:3000
+**🚀 Application URL:** http://auto-blog.duckdns.org:3000
 
 The application is deployed on AWS EC2 in the **ap-southeast-2 (Sydney)** region.
 
