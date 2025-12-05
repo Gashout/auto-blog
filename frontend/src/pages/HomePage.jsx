@@ -29,9 +29,24 @@ function HomePage() {
   if (loading) {
     return (
       <div className="container">
-        <div className="loading">
-          <div className="spinner"></div>
-          <p>Loading articles...</p>
+        <div className="home-page">
+          <div className="page-header">
+            <h1>Latest Articles</h1>
+            <p className="subtitle">
+              Discover AI-generated content on various topics
+            </p>
+          </div>
+          <div className="skeleton-grid">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="skeleton-card">
+                <div className="skeleton-line title"></div>
+                <div className="skeleton-line date"></div>
+                <div className="skeleton-line summary"></div>
+                <div className="skeleton-line summary"></div>
+                <div className="skeleton-line summary"></div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -41,6 +56,7 @@ function HomePage() {
     return (
       <div className="container">
         <div className="error">
+          <h2>Oops! Something went wrong</h2>
           <p>{error}</p>
           <button onClick={fetchArticles} className="retry-button">
             Try Again
