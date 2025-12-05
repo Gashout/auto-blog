@@ -4,6 +4,22 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## 🌐 Live Demo
+
+**🚀 Application URL:** http://3.25.219.63:3000
+
+The application is deployed on AWS EC2 in the **ap-southeast-2 (Sydney)** region.
+
+**Features you can explore:**
+- Browse AI-generated articles with modern, animated UI
+- Click any article to read the full content
+- Responsive design optimized for all devices
+- Professional skeleton loaders and smooth animations
+
+> **Note:** The application runs on port 3000. In a production environment, this would be behind a custom domain with SSL/TLS.
+
+---
+
 ## 🎯 Project Overview
 
 This project is a technical challenge submission demonstrating full-stack development and DevOps capabilities. The application automatically generates blog articles daily using AI and features a modern, responsive web interface.
@@ -46,7 +62,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture docum
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/auto-blog.git
+   git clone https://github.com/Gashout/auto-blog.git
    cd auto-blog
    ```
 
