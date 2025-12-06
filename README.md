@@ -364,15 +364,15 @@ docker-compose up --build
 
 ## 🎥 Demo Video
 
-[Link to demo video will be added here]
+[Watch the Demo Video](https://www.loom.com/share/65bc0f8d471642798559804bfdcef679)
 
 ## 🚀 Live Demo
 
-[Link to deployed application will be added here]
+[http://auto-blog.duckdns.org:3000](http://auto-blog.duckdns.org:3000)
 
 ## 📧 Contact
 
-For questions about this project, please contact: [Your Email]
+For questions about this project, please contact: Ahmedgashout998@gmail.com
 
 ## 📄 License
 
