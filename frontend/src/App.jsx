@@ -17,7 +17,7 @@ function App() {
         </main>
         <footer className="footer">
           <div className="container">
-            <p>© 2024 Auto-Generated Blog. Powered by AI.</p>
+            <p>© 2025 Auto-Generated Blog. Powered by AI.</p>
           </div>
         </footer>
       </div>
